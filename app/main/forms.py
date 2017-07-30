@@ -17,10 +17,13 @@ class EditProfileForm(Form):
 
 
 class EditProfileAdminForm(Form):
-    email = StringField('Email', validators=[Required, Length(1, 64), Email()])
-    username = StringField('Username', validators=[Required, Length(1, 64)])
+    email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
+    username = StringField('Username', validators=[DataRequired(), Length(1, 64)])
     confirmed = BooleanField('Confirmed')
-    role = SelectField('Role', coerce=int)
+    role = SelectField('Role', choices=[(1, '1'),
+                                      (2, '2'),
+                                      (3, '3')],
+                                                coerce=int)
     name = StringField('Real name', validators=[Length(0, 64)])
     location = StringField('Location', validators=[Length(0, 64)])
     about_me = TextAreaField('About me')
@@ -44,3 +47,8 @@ def validate_username(self, field):
     if field.data != self.user.username and \
             User.query.filter_by(username=field.data).first():
         raise ValidationError('Username already in use.')
+
+
+class PostForm(Form):
+    body = TextAreaField("说些什么", validators=[DataRequired()])
+    submit = SubmitField('Submit')
