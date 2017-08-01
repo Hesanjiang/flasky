@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm ,Form
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField, SelectField, ValidationError
 from wtforms.validators import DataRequired, Length, Email, Regexp, Required
 from ..models import Role, User
+from flask_pagedown.fields import PageDownField
 
 
 class NameForm(Form):
@@ -50,5 +51,5 @@ def validate_username(self, field):
 
 
 class PostForm(Form):
-    body = TextAreaField("说些什么", validators=[DataRequired()])
+    body = PageDownField("说些什么", validators=[DataRequired()])
     submit = SubmitField('Submit')
