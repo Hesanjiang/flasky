@@ -4,7 +4,7 @@ from . import auth
 from .. import db
 from ..email import send_email
 from ..models import User
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, PasswordResetForm, ChangeEmailForm, PasswordResetRequestForm, ChangePasswordForm
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -95,6 +95,7 @@ def change_password():
             flash('Invalid password.')
     return render_template("auth/change_password.html", form=form)
 
+
 @auth.route('/reset', methods=['GET', 'POST'])
 def password_reset_request():
     if not current_user.is_anonymous:
@@ -130,6 +131,7 @@ def password_reset(token):
             return redirect(url_for('main.index'))
     return render_template('auth/reset_password.html', form=form)
 
+
 @auth.route('/change-email', methods=['GET', 'POST'])
 @login_required
 def change_email_request():
@@ -148,6 +150,7 @@ def change_email_request():
             flash('Invalid email or password.')
     return render_template("auth/change_email.html", form=form)
 
+
 @auth.route('/change-email/<token>')
 @login_required
 def change_email(token):
@@ -156,3 +159,5 @@ def change_email(token):
     else:
         flash('Invalid request.')
     return redirect(url_for('main.index'))
+
+
