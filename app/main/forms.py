@@ -53,3 +53,8 @@ def validate_username(self, field):
 class PostForm(Form):
     body = PageDownField("说些什么", validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+class CommentForm(Form):
+    body = StringField('', validators=[DataRequired()])
+    submit = SubmitField('Submit')
