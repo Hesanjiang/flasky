@@ -24,9 +24,9 @@ def deploy():
     # 把数据库迁移到最新修订版本
     #upgrade()
     # 创建用户角色
-    Role.insert_roles()
+    # Role.insert_roles()
     # 让所有用户都关注此用户
-    User.add_self_follows()
+    #User.add_self_follows()
 
 if __name__ == '__main__':
     manager.run()
